@@ -83,8 +83,8 @@ map('n', '<leader>o', 'm`o<Esc>``')  -- Insert a newline in normal mode
 map('n', '<leader>xx', '<cmd>LspTroubleToggle<CR>',{silent = true, noremap = true})  -- Toggles the trouble list
 
 -------------------- TREE-SITTER ---------------------------
-local ts = require 'nvim-treesitter.configs'
-ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+-- local ts = require 'nvim-treesitter.configs'
+-- ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 
 -- Quick-Scope
 -- " Trigger a highlight only when pressing f and F.
