@@ -28,7 +28,6 @@ return require('packer').startup(function()
   use {'kyazdani42/nvim-web-devicons'}
   use {'kyazdani42/nvim-tree.lua'}
   use {'tpope/vim-commentary'}
-  use {'christoomey/vim-tmux-navigator'}
   use {'nvim-lua/popup.nvim'}
   use {'nvim-lua/plenary.nvim'}
   
