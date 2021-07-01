@@ -18,6 +18,7 @@ end
 require "plugins"
 require "treesitter"
 require "nvim-lspconfig"
+require "nvim-lint"
 require "telescope-nvim"
 require "nvimTree"
 require "mappings"
