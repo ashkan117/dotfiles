@@ -18,6 +18,7 @@ return require('packer').startup(function()
     -- use {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
     use {'shougo/deoplete-lsp'}
     use {"dstein64/vim-startuptime"}
+    use {'tpope/vim-fugitive'}
     use {'shougo/deoplete.nvim', hook = fn['remote#host#UpdateRemotePlugins']}
     use {'nvim-treesitter/nvim-treesitter'}
     use {'neovim/nvim-lspconfig'}
@@ -32,8 +33,15 @@ return require('packer').startup(function()
     use {'tpope/vim-commentary'}
     use {'nvim-lua/popup.nvim'}
     use {'nvim-lua/plenary.nvim'}
-
-    use {'nvim-telescope/telescope.nvim'}
+    use {
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            {"nvim-lua/popup.nvim"},
+            {"nvim-lua/plenary.nvim"},
+            {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+            {"nvim-telescope/telescope-media-files.nvim"}
+        },
+    }
     use {'nvim-telescope/telescope-dap.nvim'}
     use {'mfussenegger/nvim-dap-python'}
     use { "rcarriga/nvim-dap-ui" }
