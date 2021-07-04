@@ -54,6 +54,6 @@ map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], opt)
 vim.api.nvim_exec([[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
+  autocmd BufWritePost *.js FormatWrite
 augroup END
 ]], true)

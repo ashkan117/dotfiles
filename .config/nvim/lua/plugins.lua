@@ -17,10 +17,10 @@ return require('packer').startup(function()
 
     -- use {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
     use {'shougo/deoplete-lsp'}
+    use {'shougo/deoplete.nvim', hook = fn['remote#host#UpdateRemotePlugins']}
     use {'mhartington/formatter.nvim'}
     use {"dstein64/vim-startuptime"}
     use {'tpope/vim-fugitive'}
-    use {'shougo/deoplete.nvim', hook = fn['remote#host#UpdateRemotePlugins']}
     use {'nvim-treesitter/nvim-treesitter'}
     use {'neovim/nvim-lspconfig'}
     use {'mfussenegger/nvim-lint'}
