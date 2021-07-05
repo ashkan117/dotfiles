@@ -11,15 +11,13 @@ local function map(mode, lhs, rhs, opts)
 end
 
 vim.g.mapleader = " "
-
-map('n', '<C-h>', '<C-w>h')
--- map('i', '<jk>', '<ESC>', {expr = true, noremap = true})
 vim.cmd("inoremap jk <Esc>")
+
+-- map('i', '<jk>', '<ESC>', {expr = true, noremap = true})
+map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
-map('n', '<C-l>', '<cmd>noh<CR>') 
-map('n', '<C-l>', '<cmd>noh<CR>') 
 map('n', '<leader>lr', ':s/<C-r><C-w>//g<left><left>') -- local replace: replace the word under cursor with something 
 map('n', '<CR>', ':noh<CR>')
 -- <esc> :noh<return><esc>
@@ -57,3 +55,7 @@ augroup FormatAutogroup
   autocmd BufWritePost *.js FormatWrite
 augroup END
 ]], true)
+
+
+
+map('n', '<leader>xx', '<cmd>LspTroubleToggle<CR>',{silent = true, noremap = true})  -- Toggles the trouble list
