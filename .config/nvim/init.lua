@@ -10,6 +10,7 @@ end
 -------------------- Require -------------------------------
 require "plugins"
 require "treesitter"
+require "autopairs"
 require "nvim-lspconfig"
 require "nvim-lint"
 require "telescope-nvim"
@@ -22,17 +23,16 @@ require "nvim-dap"
 require "vim-vsnip"
 require "nvim-compe"
 require('dap-python').setup('/usr/bin/python3')
-require('telescope').load_extension('dap')
 require "telescope-dap"
 -- require 'python'
 require "whichkey"
 require "custom-highlights"
-require "tmux"
+-- require "tmux"
 require "dap-ui"
 
 -------------------- OPTIONS -------------------------------
 local indent = 4
-cmd 'colorscheme desert'                              -- Put your favorite colorscheme here
+-- cmd 'colorscheme desert'                              -- Put your favorite colorscheme here
 opt('b', 'expandtab', true)                           -- Use spaces instead of tabs
 opt('b', 'shiftwidth', indent)                        -- Size of an indent
 opt('b', 'smartindent', true)                         -- Insert indents automatically
@@ -52,21 +52,7 @@ opt('o', 'wildmode', 'list:longest')                  -- Command-line completion
 opt('w', 'list', true)                                -- Show some invisible characters (tabs...)
 opt('w', 'number', true)                              -- Print line number
 opt('w', 'relativenumber', true)                      -- Relative line numbers
-opt('w', 'wrap', false)                               -- Disable line wrap
-
-
--------------------- TREE-SITTER ---------------------------
--- local ts = require 'nvim-treesitter.configs'
--- ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
-
--- Quick-Scope
--- " Trigger a highlight only when pressing f and F.
-
--------------------- WINDOW-OPTIONS ---------------------------
-vim.wo.wrap = true
-vim.wo.number = true
-
-
+opt('w', 'wrap', true)                                -- Enable line wrap
 
 -- let g:deoplete#enable_at_startup = 1
 g['deoplete#enable_at_startup'] = 1  -- enable deoplete at startup
