@@ -1,9 +1,8 @@
-local function t(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+-- hide line numbers , statusline in specific buffers!
+vim.api.nvim_exec(
+    [[
+   au TermOpen term://* setlocal nonumber  laststatus=0
+   au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
+]],
+    false
+)

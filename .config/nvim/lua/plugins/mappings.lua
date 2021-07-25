@@ -13,9 +13,7 @@ end
 vim.g.mapleader = " "
 vim.cmd("inoremap jk <Esc>")
 
--- map('i', '<jk>', '<ESC>', {expr = true, noremap = true})
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
+-- map('i', '<jk>', '<ESC>', {expr = true, noremap = true}) map('n', '<C-h>', '<C-w>h') map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 map('n', '<leader>lr', ':s/<C-r><C-w>//g<left><left>') -- local replace: replace the word under cursor with something 
@@ -43,6 +41,7 @@ local opt = {}
 map("n", "<Leader>gt", [[<Cmd> Telescope git_status <CR>]], opt)
 map("n", "<Leader>cm", [[<Cmd> Telescope git_commits <CR>]], opt)
 map("n", "<Leader>ff", [[<Cmd> Telescope find_files <CR>]], opt)
+map("n", "<Leader>fg", [[<Cmd> Telescope live_grep <CR>]], opt)
 map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
 map("n", "<Leader>fb", [[<Cmd>Telescope buffers<CR>]], opt)
 map("n", "<Leader>fh", [[<Cmd>Telescope help_tags<CR>]], opt)
