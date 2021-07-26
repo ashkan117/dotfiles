@@ -36,7 +36,7 @@ return require('packer').startup(
             "windwp/nvim-autopairs",  -- smarter pairing of strings,parenthesis
             after = "nvim-compe",
             config = function()
-                require "plugins.nvim-compe"
+                require "plugins.autopairs"
             end
         }
         use {
@@ -81,6 +81,9 @@ return require('packer').startup(
             'hrsh7th/nvim-compe',
             event = "InsertEnter",
             wants = "LuaSnip",
+            config = function()
+                require "plugins.nvim-compe"
+            end,
             requires = {
                 {
                     "L3MON4D3/LuaSnip",

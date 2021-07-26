@@ -4,7 +4,7 @@
 vim.g.startify_bookmarks = { 
     {i = '~/.config/nvim/init.lua'}, 
     {t = '~/.config/nvim/lua/plugins/telescope-nvim.lua'}, 
-    {p = '~/.config/nvim/lua/plugins/plugins.lua'},
+    {p = '~/.config/nvim/lua/pluginList.lua'},
     {m = '~/.config/nvim/lua/mappings.lua'}
 }  -- enable deoplete at startup
 

@@ -8,6 +8,8 @@ local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 local function opts(scope, key, value) scopes[scope][key] = value if scope ~= 'o' then scopes['o'][key] = value end
 end
 
+vim.cmd[[colorscheme tokyonight]]
+
 -------------------- OPTIONS -------------------------------
 local indent = 4
 -- cmd 'colorscheme desert'                              -- Put your favorite colorscheme here
@@ -60,6 +62,16 @@ opt.whichwrap:append("<>hl")
 g.mapleader = " "
 g.auto_save = false
 
+-- let g:deoplete#enable_at_startup = 1
+g['deoplete#enable_at_startup'] = 1  -- enable deoplete at startup
+-- let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+g['qs_highlight_on_keys'] = {'f', 'F', 't', 'T'} -- trigger a highlight when pressing these keys:
+
+-- require('material').set()
+-- vim.g.material_style = "darker"
+
+vim.g.dap_virtual_text = true
+
 -- disable builtin vim plugins
 local disabled_built_ins = {
     "netrw",
@@ -88,4 +100,5 @@ end
 
 -- file extension specific tabbing
 -- vim.cmd([[autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4]])
+
 
