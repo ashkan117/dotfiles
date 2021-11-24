@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.config/kitty: .config/kitty/
+    ~/.config/nvim: .config/nvim/
+    ~/.tmux: .tmux/
+    ~/.tmux.conf: .tmux.conf
+    ~/.bashrc: .bashrc
+    ~/.bash_alias: .bash_alias
+    ~/.bash_profile: .bash_profile
+
+- shell:
+   - [git submodule update --init --recursive, Installing submodules]
+   - [~/.tmux/plugins/tpm/scripts/install_plugins.sh >/dev/null 2>&1, Installing tmux plugins]
