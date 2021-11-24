@@ -11,7 +11,7 @@ end
 vim.cmd[[colorscheme tokyonight]]
 
 -------------------- OPTIONS -------------------------------
-local indent = 4
+local indent = 2
 -- cmd 'colorscheme desert'                              -- Put your favorite colorscheme here
 opts('b', 'expandtab', true)                           -- Use spaces instead of tabs
 opts('b', 'shiftwidth', indent)                        -- Size of an indent
@@ -20,12 +20,16 @@ opts('b', 'tabstop', indent)                           -- Number of spaces tabs 
 opts('o', 'completeopt', 'menuone,noinsert,noselect')  -- Completion options (for deoplete)
 opts('o', 'hidden', true)                              -- Enable modified buffers in background
 opts('o', 'ignorecase', true)                          -- Ignore case
+opts('o', 'incsearch', true)                           -- Turn on incremental search
+opts('o', 'hlsearch', true)                            -- Get rid of highlights after search
+opts('o', 'inccommand', "nosplit")                     -- Show the affect of your search and replace as you type
 opts('o', 'joinspaces', false)                         -- No double spaces with join after a dot
 opts('o', 'scrolloff', 4 )                             -- Lines of context
 opts('o', 'shiftround', true)                          -- Round indent
 opts('o', 'sidescrolloff', 8 )                         -- Columns of context
 opts('o', 'smartcase', true)                           -- Don't ignore case with capitals
 opts('o', 'splitbelow', true)                          -- Put new windows below current
+opts('o', 'encoding', 'utf8')                          -- Put new windows below current
 opts('o', 'splitright', true)                          -- Put new windows right of current
 opts('o', 'termguicolors', true)                       -- True color support
 opts('o', 'wildmode', 'list:longest')                  -- Command-line completion mode

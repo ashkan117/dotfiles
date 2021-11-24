@@ -40,6 +40,7 @@ map("n", "<C-a>", ":%y+<CR>", opt)
 
 -- toggle numbers
 map("n", "<leader>n", ":set nu!<CR>", opt)
+map("n", "<leader><leader>", "<C-^>", opt)
 
 map("n", "<C-s>", ":w <CR>", opt)
 
@@ -109,7 +110,7 @@ map("i", "<CR>", "v:lua.completions()", {expr = true})
 map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 
 -- format code
--- map("n", "<Leader>fm", ":Neoformat<CR>", opt)
+-- map("n", "<Leader>fm", ":Format<CR>", opt)
 
 -- dashboard stuff
 -- map("n", "<Leader>db", ":Dashboard<CR>", opt)
@@ -118,11 +119,16 @@ map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 -- map("n", "<C-s>l", ":SessionLoad<CR>", opt)
 -- map("n", "<C-s>s", ":SessionSave<CR>", opt)
 
+-- more sane mapping for moving to start and end of line
+-- similar to how C and D work 
+map("n", "H", "0", opt)
+map("n", "L", "$", opt)
+
 -- Telescope
-map("n", "<Leader>fw", ":Telescope live_grep<CR>", opt)
 map("n", "<Leader>gt", ":Telescope git_status <CR>", opt)
 map("n", "<Leader>cm", ":Telescope git_commits <CR>", opt)
 map("n", "<Leader>ff", ":Telescope find_files <CR>", opt)
+map("n", "<Leader>fg", ":Telescope live_grep <CR>", opt)
 map("n", "<Leader>fp", ":Telescope media_files <CR>", opt)
 map("n", "<Leader>fb", ":Telescope buffers<CR>", opt)
 map("n", "<Leader>fh", ":Telescope help_tags<CR>", opt)
@@ -155,3 +161,35 @@ map("n", "<Leader>gs", ":Git<CR>", opt)
 map("n", "<Leader>gh", ":diffget //2<CR>", opt)
 map("n", "<Leader>gl", ":diffget //3<CR>", opt)
 map("n", "<Leader>gb", ":Git blame<CR>", opt)
+
+-- tmux
+-- map("n", "<C-h>", "[[<cmd>lua require("tmux").move_left()<cr>]]", opt)
+-- map("n", "<C-l>", "[[<cmd>lua require("tmux").move_right()<cr>]]", opt)
+-- map("n", "<C-j>", "[[<cmd>lua require("tmux").move_bottom()<cr>]]", opt)
+-- map("n", "<C-k>", "[[<cmd>lua require("tmux").move_top()<cr>]]", opt)
+--
+--
+--
+map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+map("n", "<space-xx>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+-- map("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+
+
+-- place this in one of your configuration file(s)
+map('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+map('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+

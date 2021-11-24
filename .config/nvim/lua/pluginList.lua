@@ -15,11 +15,47 @@ local fn = vim.fn
 
 return require('packer').startup(
     function()
+
+        -- use {
+        --     'machakann/vim-highlightedyank'
+        -- }
+
         -- Packer can manage itself
         use { 
             'wbthomason/packer.nvim',
             event = "VimEnter"
         }
+
+        use({
+          'ggandor/lightspeed.nvim'
+        })
+
+        use({
+            'weilbith/nvim-code-action-menu',
+            cmd = 'CodeActionMenu',
+        })
+
+        use {
+            'kosayoda/nvim-lightbulb',
+            -- config = function()
+            --     require "plugins.nvim-lightbulb"
+            -- end
+        }
+
+        use 'hrsh7th/cmp-nvim-lsp'
+        use 'hrsh7th/cmp-buffer'
+        use 'hrsh7th/cmp-path'
+        use 'hrsh7th/cmp-cmdline'
+        use {
+            'hrsh7th/nvim-cmp',
+            config = function()
+                require "plugins.nvim-cmp"
+            end
+    }
+
+
+        use "lukas-reineke/indent-blankline.nvim"
+
         -- Plugins can have dependencies on other plugins
         -- use {
         --   'haorenW1025/completion-nvim',
@@ -34,7 +70,6 @@ return require('packer').startup(
         -- }
         use { 
             "windwp/nvim-autopairs",  -- smarter pairing of strings,parenthesis
-            after = "nvim-compe",
             config = function()
                 require "plugins.autopairs"
             end
@@ -56,13 +91,15 @@ return require('packer').startup(
         }
         use {
             'neovim/nvim-lspconfig',
-             after = "nvim-lspinstall",
             config = function()
                 require "plugins.nvim-lspconfig"
             end
         }
         use {
-            "kabouzeid/nvim-lspinstall",
+            'williamboman/nvim-lsp-installer',
+            config = function()
+                require "plugins.nvim-lsp-installer"
+            end,
             event = "BufRead"
         }
         use {
@@ -78,28 +115,6 @@ return require('packer').startup(
         use {'junegunn/fzf.vim'}
         use {'ojroques/nvim-lspfuzzy'}
         use {
-            'hrsh7th/nvim-compe',
-            event = "InsertEnter",
-            wants = "LuaSnip",
-            config = function()
-                require "plugins.nvim-compe"
-            end,
-            requires = {
-                {
-                    "L3MON4D3/LuaSnip",
-                    wants = "friendly-snippets",
-                    event = "InsertCharPre",
-                    config = function()
-                        require "plugins.luasnip"
-                    end
-                },
-                {
-                    "rafamadriz/friendly-snippets",
-                    event = "InsertCharPre"
-                }
-            }
-        }
-        use {
             'akinsho/nvim-bufferline.lua',
             config = function()
                 require "plugins.top-bufferline"
@@ -113,7 +128,7 @@ return require('packer').startup(
         }
         use {
             'kyazdani42/nvim-tree.lua',
-            cmd = "NvimTreeToggle",
+            cmd = {"NvimTreeToggle", "NvimTreeFocus"},
             config = function()
                 require "plugins.nvimTree"
             end
@@ -140,25 +155,26 @@ return require('packer').startup(
                 {"nvim-telescope/telescope-media-files.nvim", cmd = "Telescope"}
             },
         }
-        use {
-            'nvim-telescope/telescope-dap.nvim',
-            config = function()
-                require "plugins.telescope-dap"
-            end
-        }
-        use {'mfussenegger/nvim-dap-python'}
-        use { 
-            "rcarriga/nvim-dap-ui",
-            config = function()
-                require "plugins.dap-ui"
-            end
-        }
-        use {
-            'mfussenegger/nvim-dap',
-            config = function()
-                require "plugins.nvim-dap"
-            end
-        }
+        -- use {'theHamsta/nvim-dap-virtual-text'}
+        -- use {
+        --     'nvim-telescope/telescope-dap.nvim',
+        --     config = function()
+        --         require "plugins.telescope-dap"
+        --     end
+        -- }
+        -- use {'mfussenegger/nvim-dap-python'}
+        -- use { 
+        --     "rcarriga/nvim-dap-ui",
+        --     config = function()
+        --         require "plugins.dap-ui"
+        --     end
+        -- }
+        -- use {
+        --     'mfussenegger/nvim-dap',
+        --     config = function()
+        --         require "plugins.nvim-dap"
+        --     end
+        -- }
 
         use {'unblevable/quick-scope'} -- visual cues to enhance f,t motion
         use {'machakann/vim-sandwich'}
@@ -209,7 +225,6 @@ return require('packer').startup(
         --
 
         use {'ray-x/lsp_signature.nvim'}
-        use {'theHamsta/nvim-dap-virtual-text'}
         use {
             "tweekmonster/startuptime.vim",
             cmd = "StartupTime"
@@ -221,5 +236,9 @@ return require('packer').startup(
                 require "plugins.tmux"
             end
         })
+
+        use {
+            'christoomey/vim-tmux-navigator'
+        }
     end
 )
