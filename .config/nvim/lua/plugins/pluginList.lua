@@ -9,6 +9,12 @@ return packer.startup(function()
     use 'wbthomason/packer.nvim'
 
 
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/nvim-cmp'
+
     -- event means only load this plugin on this event
     -- cmd means only load this plugin on this cmd
     --
@@ -39,27 +45,6 @@ return packer.startup(function()
         config = function()
             require("lspkind").init()
         end
-    }
-
-    ---- load compe in insert mode only
-    use {
-        "hrsh7th/nvim-compe",
-        event = "InsertEnter",
-        config = function()
-            require("compe-completion").config()
-        end,
-        wants = {"LuaSnip"},
-        requires = {
-            {
-                "L3MON4D3/LuaSnip",
-                wants = "friendly-snippets",
-                event = "InsertCharPre",
-                config = function()
-                    require("compe-completion").snippets()
-                end
-            },
-            "rafamadriz/friendly-snippets"
-        }
     }
 
     use {
