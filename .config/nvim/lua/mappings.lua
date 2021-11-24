@@ -8,17 +8,20 @@ end
 
 
 local opt = {}
+map('n', '<leader>sv', ":source ~/.config/nvim/init.lua<cr>", opt)
 
--- dont copy any deleted text , this is disabled by default so uncomment the below mappings if you want them
---[[ remove this line
+map('n', '<leader>gf', ":edit <cfile><cr>", opt)
 
-map("n", "dd", [=[ "_dd ]=], opt)
-map("v", "dd", [=[ "_dd ]=], opt)
-map("v", "x", [=[ "_x ]=], opt)
+-- Reselect the cursor position when yanking a visual selection
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
- this line too ]]
---
+-- Keep things centered when going through searches
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+map("n", "J", "mzJ`z")
 
+map("v", "p", '"_dP', opt)
 -- Don't copy the replaced text after pasting in visual mode
 map("v", "p", '"_dP', opt)
 
@@ -146,6 +149,8 @@ map("n", "<Leader>fo", ":Telescope oldfiles<CR>", opt)
 -- use ESC to turn off search highlighting
 map("n", "<Esc>", ":noh<CR>", opt)
 
+map("i", "jk", "<esc>", opt)
+
 -- get out of terminal with jk
 map("t", "jk", "<C-\\><C-n>", opt)
 
@@ -192,4 +197,6 @@ map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 -- place this in one of your configuration file(s)
 map('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 map('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+
+
 
