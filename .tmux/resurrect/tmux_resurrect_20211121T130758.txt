@@ -1,0 +1,9 @@
+pane	0	0	1	:*	0	:/home/ash	1	zsh	:
+pane	ps	0	0	:-	0	:/home/ash/projects/pullscription/pullscription-web	0	zsh	:
+pane	ps	0	0	:-	1	:/home/ash/projects/pullscription/pullscription-web	1	node	:node /usr/bin/yarn serve
+pane	ps	1	1	:*	0	:/home/ash/projects/pullscription/pullscription-server/backend	1	nvim	:/tmp/.mount_nvim.azSEVPJ/usr/bin/nvim
+pane	ps	1	1	:*	1	:/home/ash/projects/pullscription/pullscription-server/backend	0	npm	:npm run start
+window	0	0	:zsh	1	:*	ccbd,190x48,0,0,0	:
+window	ps	0	:frontend	0	:-	5ca6,190x48,0,0[190x34,0,0,1,190x13,0,35,2]	off
+window	ps	1	:backend	1	:*	d2c8,190x48,0,0[190x38,0,0,3,190x9,0,39,4]	off
+state	ps	
