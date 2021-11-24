@@ -1,6 +1,7 @@
 local g = vim.g      -- a table to access global variables
 local chad_modules = {
     "options",
+    "autocmds",
     "mappings",
     "utils",
     "pluginList"
