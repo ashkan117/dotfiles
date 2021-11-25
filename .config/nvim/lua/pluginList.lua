@@ -26,6 +26,12 @@ return require('packer').startup(
             event = "VimEnter"
         }
 
+        use 'machakann/vim-highlightedyank'
+
+        use {
+          'tpope/vim-surround'
+        }
+
         use({
           'ggandor/lightspeed.nvim'
         })
@@ -177,7 +183,6 @@ return require('packer').startup(
         -- }
 
         use {'unblevable/quick-scope'} -- visual cues to enhance f,t motion
-        use {'machakann/vim-sandwich'}
         -- use {'folke/lsp-trouble.nvim'} -- nice IDE like error list
         -- use {'tpope/vim-unimpaired'} -- next buffer with ]b
         use {

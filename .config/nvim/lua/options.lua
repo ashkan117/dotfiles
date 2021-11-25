@@ -24,9 +24,9 @@ opts('o', 'incsearch', true)                           -- Turn on incremental se
 opts('o', 'hlsearch', true)                            -- Get rid of highlights after search
 opts('o', 'inccommand', "nosplit")                     -- Show the affect of your search and replace as you type
 opts('o', 'joinspaces', false)                         -- No double spaces with join after a dot
-opts('o', 'scrolloff', 8 )                             -- Lines of context
-opts('o', 'sidescrolloff', 8 )                         -- Columns of context
+opts('o', 'scrolloff', 4 )                             -- Lines of context
 opts('o', 'shiftround', true)                          -- Round indent
+opts('o', 'sidescrolloff', 8 )                         -- Columns of context
 opts('o', 'smartcase', true)                           -- Don't ignore case with capitals
 opts('o', 'splitbelow', true)                          -- Put new windows below current
 opts('o', 'encoding', 'utf8')                          -- Put new windows below current
