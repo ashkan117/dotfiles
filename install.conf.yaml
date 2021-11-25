@@ -3,7 +3,11 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config']
+- clean:
+  ~/:
+    force: false
+  ~/.config/nvim:
+    recursive: true
 
 - link:
     ~/.config/kitty: .config/kitty/
