@@ -3,20 +3,24 @@
       create: true
       relink: true
 
-- clean:
-  ~/:
-    force: false
-  ~/.config/nvim:
-    recursive: true
+        
+- clean: ['~', '~/.config']
 
 - link:
     ~/.config/kitty: .config/kitty/
-    ~/.config/nvim: .config/nvim/
-    ~/.tmux: .tmux/
-    ~/.tmux.conf: .tmux.conf
-    ~/.bashrc: .bashrc
-    ~/.bash_alias: .bash_alias
-    ~/.bash_profile: .bash_profile
+    ~/.config/nvim: 
+      force: true
+      path: .config/nvim/ 
+    ~/.tmux: 
+      # force: true
+    ~/.tmux.conf: 
+      # force: true
+    ~/.bashrc: 
+      # force: true
+    ~/.bash_alias: 
+      # force: true
+    ~/.bash_profile: 
+      # force: true
 
 - shell:
    - [git submodule update --init --recursive, Installing submodules]
