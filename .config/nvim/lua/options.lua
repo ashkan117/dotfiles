@@ -48,7 +48,7 @@ opt.signcolumn = "yes"
 opt.cmdheight = 1
 opt.updatetime = 250 -- update interval for gitsigns
 opt.timeoutlen = 400
--- opt.clipboard = "unnamedplus"
+opt.clipboard = "unnamedplus" -- links neovim to system clipboard
 
 -- disable nvim intro
 opt.shortmess:append("sI")

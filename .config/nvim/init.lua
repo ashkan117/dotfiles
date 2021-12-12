@@ -1,5 +1,5 @@
 local g = vim.g      -- a table to access global variables
-local chad_modules = {
+local modules = {
     "options",
     "autocmds",
     "mappings",
@@ -7,7 +7,7 @@ local chad_modules = {
     "pluginList"
 }
 
-for i = 1, #chad_modules, 1 do
-    pcall(require, chad_modules[i])
+for i = 1, #modules, 1 do
+    pcall(require, modules[i])
 end
 

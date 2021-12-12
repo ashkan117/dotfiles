@@ -13,7 +13,7 @@ local use = packer.use
 local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn
 
-return require('packer').startup(
+return packer.startup(
     function()
 
         -- use {
@@ -44,7 +44,7 @@ return require('packer').startup(
         use {
             'kosayoda/nvim-lightbulb',
             -- config = function()
-            --     require "plugins.nvim-lightbulb"
+            --     require "configs.nvim-lightbulb"
             -- end
         }
 
@@ -55,7 +55,7 @@ return require('packer').startup(
         use {
             'hrsh7th/nvim-cmp',
             config = function()
-                require "plugins.nvim-cmp"
+                require "configs.nvim-cmp"
             end
     }
 
@@ -77,13 +77,13 @@ return require('packer').startup(
         use { 
             "windwp/nvim-autopairs",  -- smarter pairing of strings,parenthesis
             config = function()
-                require "plugins.autopairs"
+                require "configs.autopairs"
             end
         }
         use {
             'mhartington/formatter.nvim',
             config = function()
-                require "plugins.formatter"
+                require "configs.formatter"
             end
         }
         use {"dstein64/vim-startuptime"}
@@ -92,26 +92,26 @@ return require('packer').startup(
             'nvim-treesitter/nvim-treesitter',
             event = "BufRead",
             config = function()
-                require "plugins.treesitter"
+                require "configs.treesitter"
             end
         }
         use {
             'neovim/nvim-lspconfig',
             config = function()
-                require "plugins.nvim-lspconfig"
+                require "configs.nvim-lspconfig"
             end
         }
         use {
             'williamboman/nvim-lsp-installer',
             config = function()
-                require "plugins.nvim-lsp-installer"
+                require "configs.nvim-lsp-installer"
             end,
             event = "BufRead"
         }
         use {
             'mfussenegger/nvim-lint',
             config = function()
-                require "plugins.nvim-lint"
+                require "configs.nvim-lint"
             end
         }
         use {
@@ -123,23 +123,28 @@ return require('packer').startup(
         use {
             'akinsho/nvim-bufferline.lua',
             config = function()
-                require "plugins.top-bufferline"
+                require "configs.top-bufferline"
             end
         }
         use {
             'kyazdani42/nvim-web-devicons',
             config = function()
-                require "plugins.icons"
+                require "configs.icons"
             end
         }
         use {
             'kyazdani42/nvim-tree.lua',
             cmd = {"NvimTreeToggle", "NvimTreeFocus"},
             config = function()
-                require "plugins.nvimTree"
+                require "configs.nvimTree"
             end
         }
-        use {'tpope/vim-commentary'}
+        use {
+          'numToStr/Comment.nvim',
+          config = function()
+            require('Comment').setup()
+          end
+        }
         use {
             'nvim-lua/popup.nvim',
             after = "plenary.nvim"
@@ -152,7 +157,7 @@ return require('packer').startup(
             "nvim-telescope/telescope.nvim",
             cmd = "Telescope",
             config = function()
-                require "plugins.telescope-nvim"
+                require "configs.telescope-nvim"
             end,
             requires = {
                 {"nvim-lua/popup.nvim"},
@@ -165,20 +170,20 @@ return require('packer').startup(
         -- use {
         --     'nvim-telescope/telescope-dap.nvim',
         --     config = function()
-        --         require "plugins.telescope-dap"
+        --         require "configs.telescope-dap"
         --     end
         -- }
         -- use {'mfussenegger/nvim-dap-python'}
         -- use { 
         --     "rcarriga/nvim-dap-ui",
         --     config = function()
-        --         require "plugins.dap-ui"
+        --         require "configs.dap-ui"
         --     end
         -- }
         -- use {
         --     'mfussenegger/nvim-dap',
         --     config = function()
-        --         require "plugins.nvim-dap"
+        --         require "configs.nvim-dap"
         --     end
         -- }
 
@@ -188,7 +193,7 @@ return require('packer').startup(
         use {
             'mhinz/vim-startify',
             config = function()
-                require "plugins.startify"
+                require "configs.startify"
             end
         }
         use {'wellle/targets.vim'} -- extends ci' to things like (),commas,
@@ -203,7 +208,7 @@ return require('packer').startup(
         use {
             "folke/which-key.nvim",
             config = function()
-                require "plugins.whichkey"
+                require "configs.whichkey"
             end
         }
         --
@@ -211,7 +216,7 @@ return require('packer').startup(
         use { 
             "hrsh7th/vim-vsnip",
             config = function()
-                require "plugins.vim-vsnip"
+                require "configs.vim-vsnip"
             end
         }
         use { "hrsh7th/vim-vsnip-integ" }
@@ -238,7 +243,7 @@ return require('packer').startup(
         use({
             "aserowy/tmux.nvim",
             config = function()
-                require "plugins.tmux"
+                require "configs.tmux"
             end
         })
 
