@@ -112,9 +112,6 @@ map("i", "<CR>", "v:lua.completions()", {expr = true})
 -- nvimtree
 map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 
--- format code
--- map("n", "<Leader>fm", ":Format<CR>", opt)
-
 -- dashboard stuff
 -- map("n", "<Leader>db", ":Dashboard<CR>", opt)
 -- map("n", "<Leader>fn", ":DashboardNewFile<CR>", opt)
@@ -185,7 +182,7 @@ map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts
 map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 map("n", "<space-xx>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
--- map("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+map("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
