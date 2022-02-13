@@ -1,0 +1,5 @@
+alias nvim='~/appimage/nvim.appimage'
+alias vim='~/appimage/nvim.appimage'
+alias pbcopy='xsel --clipboard --input'
+alias ls='ls -a'
+alias pbpaste='xsel --clipboard --output'

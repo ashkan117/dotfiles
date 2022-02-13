@@ -7,20 +7,25 @@
 - clean: ['~', '~/.config']
 
 - link:
-    ~/.config/kitty: .config/kitty/
-    ~/.config/nvim: 
+    ~/.config/kitty: 
+      path: .config/kitty/
       force: true
+    ~/.config/nvim: 
       path: .config/nvim/ 
-    ~/.tmux: 
-      # force: true
+      force: true
     ~/.tmux.conf: 
-      # force: true
+      force: true
     ~/.bashrc: 
-      # force: true
+      force: true
     ~/.bash_alias: 
-      # force: true
+      path: .bash_alias
+      force: true
     ~/.bash_profile: 
-      # force: true
+      path: .bash_profile
+      force: true
+    ~/appimage: 
+      path: appimage
+      force: true
 
 - shell:
    - [git submodule update --init --recursive, Installing submodules]
