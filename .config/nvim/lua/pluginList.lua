@@ -31,7 +31,14 @@ return packer.startup(function()
 	})
 
 	use({
-		"ggandor/lightspeed.nvim",
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").set_default_keymaps()
+		end,
+	})
+
+	use({
+		"tpope/vim-repeat",
 	})
 
 	use({
@@ -42,11 +49,20 @@ return packer.startup(function()
 	use({
 		"kosayoda/nvim-lightbulb",
 	})
-
-	use("hrsh7th/cmp-nvim-lsp")
+	use({
+		"L3MON4D3/LuaSnip",
+		config = function()
+			require("configs._luasnip")
+		end,
+	})
+	use("onsails/lspkind-nvim")
+	-- For vsnip users.
+	use("hrsh7th/cmp-vsnip")
+	use("hrsh7th/vim-vsnip")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
+	use("hrsh7th/cmp-nvim-lsp")
 	use({
 		"hrsh7th/nvim-cmp",
 		config = function()
@@ -129,6 +145,9 @@ return packer.startup(function()
 	})
 	use({
 		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
 	})
 	use({
 		"nvim-lua/popup.nvim",
@@ -137,8 +156,8 @@ return packer.startup(function()
 	use({
 		"nvim-lua/plenary.nvim",
 	})
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'nvim-telescope/telescope-media-files.nvim'
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	use("nvim-telescope/telescope-media-files.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
 		config = function()
@@ -150,7 +169,18 @@ return packer.startup(function()
 		},
 	})
 	use({ "unblevable/quick-scope" }) -- visual cues to enhance f,t motion
-	-- use {'folke/lsp-trouble.nvim'} -- nice IDE like error list
+	-- -- Lua
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 	-- use {'tpope/vim-unimpaired'} -- next buffer with ]b
 	use({
 		"mhinz/vim-startify",

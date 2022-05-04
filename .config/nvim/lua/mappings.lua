@@ -1,16 +1,14 @@
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	local options = { noremap = true, silent = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-
 local opt = {}
-map('n', '<leader>sv', ":source ~/.config/nvim/init.lua<cr>", opt)
 
-map('n', '<leader>gf', ":edit <cfile><cr>", opt)
+map("n", "<leader>gf", ":edit <cfile><cr>", opt)
 
 -- Reselect the cursor position when yanking a visual selection
 map("v", "<", "<gv")
@@ -28,10 +26,10 @@ map("v", "p", '"_dP', opt)
 -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 -- empty mode is same as using :map
-map("", "j", 'v:count ? "j" : "gj"', {expr = true})
-map("", "k", 'v:count ? "k" : "gk"', {expr = true})
-map("", "<Down>", 'v:count ? "j" : "gj"', {expr = true})
-map("", "<Up>", 'v:count ? "k" : "gk"', {expr = true})
+map("", "j", 'v:count ? "j" : "gj"', { expr = true })
+map("", "k", 'v:count ? "k" : "gk"', { expr = true })
+map("", "<Down>", 'v:count ? "j" : "gj"', { expr = true })
+map("", "<Up>", 'v:count ? "k" : "gk"', { expr = true })
 
 -- OPEN TERMINALS --
 map("n", "<C-l>", ":vnew +terminal | setlocal nobuflisted <CR>", opt) -- term over right
@@ -47,67 +45,62 @@ map("n", "<leader><leader>", "<C-^>", opt)
 
 map("n", "<C-s>", ":w <CR>", opt)
 
-
 -- compe stuff
 local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 local check_back_space = function()
-    local col = vim.fn.col(".") - 1
-    if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-        return true
-    else
-        return false
-    end
+	local col = vim.fn.col(".") - 1
+	if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+		return true
+	else
+		return false
+	end
 end
 
 _G.tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return vim.fn["compe#complete"]()
-    end
+	if vim.fn.pumvisible() == 1 then
+		return t("<C-n>")
+	elseif check_back_space() then
+		return t("<Tab>")
+	else
+		return vim.fn["compe#complete"]()
+	end
 end
 
 _G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        return t "<S-Tab>"
-    end
+	if vim.fn.pumvisible() == 1 then
+		return t("<C-p>")
+	elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
+		return t("<Plug>(vsnip-jump-prev)")
+	else
+		return t("<S-Tab>")
+	end
 end
 
 function _G.completions()
-    local npairs
-    if
-        not pcall(
-            function()
-                npairs = require "nvim-autopairs"
-            end
-        )
-     then
-        return
-    end
+	local npairs
+	if not pcall(function()
+		npairs = require("nvim-autopairs")
+	end) then
+		return
+	end
 
-    if vim.fn.pumvisible() == 1 then
-        if vim.fn.complete_info()["selected"] ~= -1 then
-            return vim.fn["compe#confirm"]("<CR>")
-        end
-    end
-    return npairs.check_break_line_char()
+	if vim.fn.pumvisible() == 1 then
+		if vim.fn.complete_info()["selected"] ~= -1 then
+			return vim.fn["compe#confirm"]("<CR>")
+		end
+	end
+	return npairs.check_break_line_char()
 end
 
 --  compe mappings
-map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-map("i", "<CR>", "v:lua.completions()", {expr = true})
+map("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
+map("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
+map("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+map("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
+map("i", "<CR>", "v:lua.completions()", { expr = true })
 
 -- nvimtree
 map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
@@ -120,7 +113,7 @@ map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 -- map("n", "<C-s>s", ":SessionSave<CR>", opt)
 
 -- more sane mapping for moving to start and end of line
--- similar to how C and D work 
+-- similar to how C and D work
 map("n", "H", "0", opt)
 map("n", "L", "$", opt)
 
@@ -189,3 +182,10 @@ map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", 
 map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+
+-- Page up and down with Shift + j and Shift + k
+-- vim.keymap.set("n", "J", "<PageDown>", {})
+-- vim.keymap.set("n", "K", "<PageUp>", {})
+
+-- vim.keymap.set("n", "ei", ":e ~/.config/nvim/init.lua<cr>", {})
+vim.keymap.set("n", "ri", ":luafile ~/.config/nvim/init.lua<cr>", {})
