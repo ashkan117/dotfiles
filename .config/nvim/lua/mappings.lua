@@ -1,9 +1,11 @@
+local ls = require("luasnip")
+
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  local options = { noremap = true, silent = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local opt = {}
@@ -22,6 +24,27 @@ map("n", "J", "mzJ`z")
 map("v", "p", '"_dP', opt)
 -- Don't copy the replaced text after pasting in visual mode
 map("v", "p", '"_dP', opt)
+
+-- nvim cmp
+vim.keymap.set({ "i", "s" }, "<c-k>", function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<c-j>", function()
+  if ls.jumpable(-1) then
+    ls.jump(-1)
+  end
+end, { silent = true })
+
+vim.keymap.set({ "i" }, "<c-l>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end)
+
+vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/configs/_luasnip.lua<CR>")
 
 -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -42,65 +65,6 @@ map("n", "<C-a>", ":%y+<CR>", opt)
 -- toggle numbers
 map("n", "<leader>n", ":set nu!<CR>", opt)
 map("n", "<leader><leader>", "<C-^>", opt)
-
-map("n", "<C-s>", ":w <CR>", opt)
-
--- compe stuff
-local t = function(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-	local col = vim.fn.col(".") - 1
-	if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-		return true
-	else
-		return false
-	end
-end
-
-_G.tab_complete = function()
-	if vim.fn.pumvisible() == 1 then
-		return t("<C-n>")
-	elseif check_back_space() then
-		return t("<Tab>")
-	else
-		return vim.fn["compe#complete"]()
-	end
-end
-
-_G.s_tab_complete = function()
-	if vim.fn.pumvisible() == 1 then
-		return t("<C-p>")
-	elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
-		return t("<Plug>(vsnip-jump-prev)")
-	else
-		return t("<S-Tab>")
-	end
-end
-
-function _G.completions()
-	local npairs
-	if not pcall(function()
-		npairs = require("nvim-autopairs")
-	end) then
-		return
-	end
-
-	if vim.fn.pumvisible() == 1 then
-		if vim.fn.complete_info()["selected"] ~= -1 then
-			return vim.fn["compe#confirm"]("<CR>")
-		end
-	end
-	return npairs.check_break_line_char()
-end
-
---  compe mappings
-map("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-map("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-map("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-map("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-map("i", "<CR>", "v:lua.completions()", { expr = true })
 
 -- nvimtree
 map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
@@ -189,3 +153,12 @@ map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
 -- vim.keymap.set("n", "ei", ":e ~/.config/nvim/init.lua<cr>", {})
 vim.keymap.set("n", "ri", ":luafile ~/.config/nvim/init.lua<cr>", {})
+
+--
+-- trouble diagnostics
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
