@@ -1,14 +1,15 @@
 -------------------- HELPERS -------------------------------
 local g = vim.g -- a table to access global variables
 local opt = vim.opt
+local api = vim.api
 
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
 local function opts(scope, key, value)
-	scopes[scope][key] = value
-	if scope ~= "o" then
-		scopes["o"][key] = value
-	end
+  scopes[scope][key] = value
+  if scope ~= "o" then
+    scopes["o"][key] = value
+  end
 end
 
 vim.cmd([[colorscheme tokyonight]])
@@ -80,29 +81,48 @@ vim.g.dap_virtual_text = true
 
 -- disable builtin vim plugins
 local disabled_built_ins = {
-	"netrw",
-	"netrwPlugin",
-	"netrwSettings",
-	"netrwFileHandlers",
-	"gzip",
-	"zip",
-	"zipPlugin",
-	"tar",
-	"tarPlugin",
-	"getscript",
-	"getscriptPlugin",
-	"vimball",
-	"vimballPlugin",
-	"2html_plugin",
-	"logipat",
-	"rrhelper",
-	"spellfile_plugin",
-	"matchit",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-	vim.g["loaded_" .. plugin] = 1
+  vim.g["loaded_" .. plugin] = 1
 end
 
 -- file extension specific tabbing
 -- vim.cmd([[autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4]])
+--
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldnestmax = "1"
+--
+-- local autoCommands = {
+--   -- other autocommands
+--   open_folds = {
+--     { "BufReadPost,FileReadPost", "*", "normal zR" }
+--   }
+-- }
+
+local augroup = vim.api.nvim_create_augroup("OpenFolds", { clear = true })
+vim.api.nvim_create_autocmd("BufReadPost,FileReadPost", {
+  pattern = "*",
+  buffer = 0,
+  callback = ':normal zR',
+  group = augroup
+})

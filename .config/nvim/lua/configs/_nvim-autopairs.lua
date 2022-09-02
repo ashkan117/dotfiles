@@ -1,7 +1,7 @@
 local present1, autopairs = pcall(require, "nvim-autopairs")
 
 if not present1 then
-	return
+  return
 end
 
 autopairs.setup()
@@ -11,7 +11,7 @@ local cmp = require("cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
 -- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+-- cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 -- autopairs_completion.setup(
 --     {
 --         map_cr = true,

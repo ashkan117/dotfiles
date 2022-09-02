@@ -31,4 +31,10 @@ ls.add_snippets("all", {
     i(1, ""),
     t('")'),
   }),
+  s("stringify", {
+    -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+    t("logger.debug(JSON.stringify("),
+    i(1, ""),
+    t(", null, 4))"),
+  }),
 })

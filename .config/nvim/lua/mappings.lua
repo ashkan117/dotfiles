@@ -116,10 +116,10 @@ vim.cmd("silent! command PackerSync lua require 'pluginList' require('packer').s
 vim.cmd("silent! command PackerUpdate lua require 'pluginList' require('packer').update()")
 
 -- Vim Fugitive
-map("n", "<Leader>gs", ":Git<CR>", opt)
-map("n", "<Leader>gh", ":diffget //2<CR>", opt)
-map("n", "<Leader>gl", ":diffget //3<CR>", opt)
-map("n", "<Leader>gb", ":Git blame<CR>", opt)
+-- map("n", "<Leader>gs", ":Git<CR>", opt)
+-- map("n", "<Leader>gh", ":diffget //2<CR>", opt)
+-- map("n", "<Leader>gl", ":diffget //3<CR>", opt)
+-- map("n", "<Leader>gb", ":Git blame<CR>", opt)
 
 -- tmux
 -- map("n", "<C-h>", "[[<cmd>lua require("tmux").move_left()<cr>]]", opt)
@@ -129,23 +129,23 @@ map("n", "<Leader>gb", ":Git blame<CR>", opt)
 --
 --
 --
-map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-map("n", "<space-xx>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-map("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+-- map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent= true})
+-- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+-- map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+-- map("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+-- map("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+-- map("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+-- map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+-- map("n", "<space-xx>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+-- map("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+-- map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
+-- map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+-- map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+-- map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+-- map("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
 -- Page up and down with Shift + j and Shift + k
 -- vim.keymap.set("n", "J", "<PageDown>", {})
@@ -162,3 +162,22 @@ vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr
 vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
+
+vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
+vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true, noremap = true })
+
+vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+local action = require("lspsaga.action")
+-- scroll down hover doc or scroll in definition preview
+vim.keymap.set("n", "<C-f>", function()
+  action.smart_scroll_with_saga(1)
+end, { silent = true })
+-- scroll up hover doc
+vim.keymap.set("n", "<C-b>", function()
+  action.smart_scroll_with_saga(-1)
+end, { silent = true })
+vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true, noremap = true })
+-- close rename win use <C-c> in insert mode or `q` in normal mode or `:q`
+-- vim.keymap.set("n", "gd", "<cmd>Lspsaga preview_definition<CR>", { silent = true })

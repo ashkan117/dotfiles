@@ -91,34 +91,17 @@ return packer.startup(function()
       require("configs._nvim-treesitter")
     end,
   })
-  -- use({
-  -- 	"neovim/nvim-lspconfig",
-  -- 	config = function()
-  -- 		require("configs._nvim-lspconfig")
-  -- 	end,
-  -- })
+  use({
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("configs._nvim-lspconfig")
+    end,
+  })
   use({
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("configs._null-ls")
     end,
-  })
-  -- use({
-  -- 	"williamboman/nvim-lsp-installer",
-  -- 	config = function()
-  -- 		require("configs._nvim-lsp-installer")
-  -- 	end,
-  -- 	-- event = "BufRead",
-  -- })
-  use({
-    "williamboman/nvim-lsp-installer",
-    {
-      "neovim/nvim-lspconfig",
-      config = function()
-        require("configs._nvim-lsp-installer")
-        require("configs._nvim-lspconfig")
-      end,
-    },
   })
   use({
     "junegunn/fzf",
@@ -231,5 +214,28 @@ return packer.startup(function()
 
   use({
     "christoomey/vim-tmux-navigator",
+  })
+  use("mfussenegger/nvim-jdtls")
+  use({
+    "otavioschwanck/cool-substitute.nvim",
+    config = function()
+      require 'cool-substitute'.setup({
+        setup_keybindings = true
+      })
+    end,
+  })
+  use({
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  })
+  use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+      local saga = require("lspsaga")
+      saga.init_lsp_saga()
+    end,
   })
 end)
