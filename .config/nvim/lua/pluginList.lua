@@ -31,6 +31,12 @@ return packer.startup(function()
   })
 
   use({
+    "bkad/CamelCaseMotion",
+  })
+
+  use({ 'mbbill/undotree' })
+
+  use({
     "ggandor/leap.nvim",
     config = function()
       require("leap").set_default_keymaps()
@@ -121,13 +127,13 @@ return packer.startup(function()
       require("configs._nvim-web-devicons")
     end,
   })
-  use({
-    "kyazdani42/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    config = function()
-      require("configs._nvim-tree")
-    end,
-  })
+  -- use({
+  --   "kyazdani42/nvim-tree.lua",
+  --   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  --   config = function()
+  --     require("configs._nvim-tree")
+  --   end,
+  -- })
   use({
     "numToStr/Comment.nvim",
     config = function()
@@ -234,8 +240,27 @@ return packer.startup(function()
     "glepnir/lspsaga.nvim",
     branch = "main",
     config = function()
-      local saga = require("lspsaga")
-      saga.init_lsp_saga()
+      require("lspsaga").setup({})
     end,
+    requires = { { "nvim-tree/nvim-web-devicons" } }
   })
+  use {
+    -- "nvim-neo-tree/neo-tree.nvim",
+    "~/projects/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
+  use { "ellisonleao/gruvbox.nvim" }
+  use {
+    's1n7ax/nvim-window-picker',
+    tag = 'v1.*',
+    config = function()
+      require 'window-picker'.setup()
+    end,
+  }
+  use { 'edluffy/hologram.nvim' }
 end)

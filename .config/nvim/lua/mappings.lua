@@ -5,7 +5,7 @@ local function map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 local opt = {}
@@ -33,8 +33,8 @@ vim.keymap.set({ "i", "s" }, "<c-k>", function()
 end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, "<c-j>", function()
-  if ls.jumpable(-1) then
-    ls.jump(-1)
+  if ls.jumpable( -1) then
+    ls.jump( -1)
   end
 end, { silent = true })
 
@@ -66,8 +66,8 @@ map("n", "<C-a>", ":%y+<CR>", opt)
 map("n", "<leader>n", ":set nu!<CR>", opt)
 map("n", "<leader><leader>", "<C-^>", opt)
 
--- nvimtree
-map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
+-- -- nvimtree
+-- map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 
 -- dashboard stuff
 -- map("n", "<Leader>db", ":Dashboard<CR>", opt)
@@ -115,6 +115,7 @@ vim.cmd("silent! command PackerStatus lua require 'pluginList' require('packer')
 vim.cmd("silent! command PackerSync lua require 'pluginList' require('packer').sync()")
 vim.cmd("silent! command PackerUpdate lua require 'pluginList' require('packer').update()")
 
+
 -- Vim Fugitive
 -- map("n", "<Leader>gs", ":Git<CR>", opt)
 -- map("n", "<Leader>gh", ":diffget //2<CR>", opt)
@@ -130,7 +131,7 @@ vim.cmd("silent! command PackerUpdate lua require 'pluginList' require('packer')
 --
 --
 -- map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent= true})
+map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", { silent = true })
 -- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 -- map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 -- map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
@@ -141,7 +142,7 @@ map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent= true})
 -- map("n", "<space-xx>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 -- map("n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 -- map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
+map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { silent = true })
 -- map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 -- map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 -- map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
@@ -156,28 +157,36 @@ vim.keymap.set("n", "ri", ":luafile ~/.config/nvim/init.lua<cr>", {})
 
 --
 -- trouble diagnostics
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
+-- vim.keymap.set('n', 'lhs', function() print("real lua function") end)
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
+
+
+-- lsp sage mappings
 vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true, noremap = true })
 vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true, noremap = true })
 
+vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-local action = require("lspsaga.action")
--- scroll down hover doc or scroll in definition preview
-vim.keymap.set("n", "<C-f>", function()
-  action.smart_scroll_with_saga(1)
-end, { silent = true })
--- scroll up hover doc
-vim.keymap.set("n", "<C-b>", function()
-  action.smart_scroll_with_saga(-1)
-end, { silent = true })
-vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true, noremap = true })
--- close rename win use <C-c> in insert mode or `q` in normal mode or `:q`
--- vim.keymap.set("n", "gd", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>s", "<cmd>Neotree float git_status<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "/", "<cmd>Neotree toggle current reveal_force_cwd<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "|", "<cmd>Neotree reveal<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "gd", "<cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<CR>",
+-- { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", "<cmd>Neotree toggle show buffers right<CR>", { noremap = true, silent = true })
+
+
+-- vim.api.nvim_set_hl(0, 'NeoTreeGitAdded', { bg = '#282828' })
+-- vim.api.nvim_set_hl(0, 'NeoTreeGitConflict', { bg = '#282828' })
+-- vim.api.nvim_set_hl(0, 'NeoTreeGitDeleted', { bg = '#282828' })
+-- vim.api.nvim_set_hl(0, 'NeoTreeGitIgnored', { bg = '#282828' })
+-- vim.api.nvim_set_hl(0, 'NeoTreeGitModified', { bg = '#282828' })
+-- vim.api.nvim_set_hl(0, 'NeoTreeGitUntracked', { bg = '#282828' })

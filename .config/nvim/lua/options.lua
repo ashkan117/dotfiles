@@ -13,7 +13,8 @@ local function opts(scope, key, value)
 end
 
 vim.cmd([[colorscheme tokyonight]])
-
+-- vim.cmd([[colorscheme gruvbox]])
+-- vim.o.background = "dark"
 -------------------- OPTIONS -------------------------------
 local indent = 2
 -- cmd 'colorscheme desert'                              -- Put your favorite colorscheme here

@@ -19,7 +19,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip", option = { use_show_condition = false } },
-    { name = "buffer", keyword_length = 5 },
+    { name = "buffer" },
   }),
   formatting = {
     format = lspkind.cmp_format({
