@@ -63,10 +63,10 @@ local on_attach = function(client, bufnr)
       callback = function()
         vim.lsp.buf.format({
           bufnr = bufnr,
-        -- filter = function(lsp_client)
-        --   -- return lsp_client.name ~= "tsserver"
-        --   -- return lsp_client.name == "null_ls"
-        -- end,
+          -- filter = function(lsp_client)
+          --   -- return lsp_client.name ~= "tsserver"
+          --   -- return lsp_client.name == "null_ls"
+          -- end,
         })
       end,
     })
@@ -175,7 +175,12 @@ lspconfig.tailwindcss.setup({
   capabilities = capabilities,
 })
 
-lspconfig.eslint.setup({
+-- lspconfig.eslint.setup({
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- })
+
+lspconfig.yamlls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })

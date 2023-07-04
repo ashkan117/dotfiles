@@ -262,5 +262,18 @@ return packer.startup(function()
       require 'window-picker'.setup()
     end,
   }
-  use { 'edluffy/hologram.nvim' }
+  use({
+    'edluffy/hologram.nvim',
+    config = function()
+      require('hologram').setup {
+        auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+      }
+    end,
+  })
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  })
 end)

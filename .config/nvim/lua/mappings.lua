@@ -33,8 +33,8 @@ vim.keymap.set({ "i", "s" }, "<c-k>", function()
 end, { silent = true })
 
 vim.keymap.set({ "i", "s" }, "<c-j>", function()
-  if ls.jumpable( -1) then
-    ls.jump( -1)
+  if ls.jumpable(-1) then
+    ls.jump(-1)
   end
 end, { silent = true })
 
@@ -55,9 +55,9 @@ map("", "<Down>", 'v:count ? "j" : "gj"', { expr = true })
 map("", "<Up>", 'v:count ? "k" : "gk"', { expr = true })
 
 -- OPEN TERMINALS --
-map("n", "<C-l>", ":vnew +terminal | setlocal nobuflisted <CR>", opt) -- term over right
+map("n", "<C-l>", ":vnew +terminal | setlocal nobuflisted <CR>", opt)  -- term over right
 map("n", "<C-x>", ":10new +terminal | setlocal nobuflisted <CR>", opt) --  term bottom
-map("n", "<C-t>t", ":<Cmd> terminal <CR>", opt) -- term buffer
+map("n", "<C-t>t", ":<Cmd> terminal <CR>", opt)                        -- term buffer
 
 -- copy whole file content
 map("n", "<C-a>", ":%y+<CR>", opt)
@@ -174,7 +174,7 @@ vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { s
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
 vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
-vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc ++quiet ++keep<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>s", "<cmd>Neotree float git_status<CR>", { noremap = true, silent = true })
 -- vim.keymap.set("n", "/", "<cmd>Neotree toggle current reveal_force_cwd<CR>", { noremap = true, silent = true })
