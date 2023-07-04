@@ -1,95 +1,62 @@
-local g = vim.g -- a table to access global variables
-local modules = {
-	"options",
-	"autocmds",
-	"mappings",
-	"utils",
-}
-
-for i = 1, #modules, 1 do
-	pcall(require, modules[i])
-end
-
-
--------------------- PLUGINS -------------------------------
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-vim.g.mapleader = " "
-vim.g.maplocalleader = ' '
-
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn
-
-require('lazy').setup(
-{
-"machakann/vim-highlightedyank",
-"tpope/vim-surround",
-"bkad/CamelCaseMotion",
-'mbbill/undotree',
-"tpope/vim-repeat",
-{
-"weilbith/nvim-code-action-menu",
-cmd = "CodeActionMenu",
-},
-"kosayoda/nvim-lightbulb",
-{
-"L3MON4D3/LuaSnip",
-config = function()
-require("lua/plugins/._luasnip")
-end,
-},
-"hrsh7th/cmp-buffer",
-"hrsh7th/cmp-path",
-"hrsh7th/cmp-cmdline",
-"hrsh7th/cmp-nvim-lsp",
-"hrsh7th/cmp-nvim-lua",
-"saadparwaiz1/cmp_luasnip",
-"onsails/lspkind-nvim",
-{
-"hrsh7th/nvim-cmp",
-config = function()
-require("lua/plugins/._nvim-cmp")
-end,
-},
-"lukas-reineke/indent-blankline.nvim",
--- {
---   "windwp/nvim-autopairs", -- smarter pairing of strings,parenthesis
---   config = function(,
---     require("lua/plugins/._nvim-autopairs",
---   end,
--- },
-"dstein64/vim-startuptime",
-"tpope/vim-fugitive",
-{
-"nvim-treesitter/nvim-treesitter",
-event = "BufRead",
-config = function()
-require("lua/plugins/._nvim-treesitter")
-end,
-},
-{
-"neovim/nvim-lspconfig",
-config = function()
-require("lua/plugins/._nvim-lspconfig")
-end,
-},
-{
-"jose-elias-alvarez/null-ls.nvim",
-config = function()
-require("lua/plugins/._null-ls")
-end,
-},
-{
+return {
+--		"machakann/vim-highlightedyank",
+--		"tpope/vim-surround",
+--		"bkad/CamelCaseMotion",
+--		'mbbill/undotree',
+--		"tpope/vim-repeat",
+--		{
+--			"weilbith/nvim-code-action-menu",
+--			cmd = "CodeActionMenu",
+--		},
+--		"kosayoda/nvim-lightbulb",
+--		{
+--			"L3MON4D3/LuaSnip",
+--			config = function()
+--				require("configs._luasnip")
+--			end,
+--		},
+--		"hrsh7th/cmp-buffer",
+--		"hrsh7th/cmp-path",
+--		"hrsh7th/cmp-cmdline",
+--		"hrsh7th/cmp-nvim-lsp",
+--		"hrsh7th/cmp-nvim-lua",
+--		"saadparwaiz1/cmp_luasnip",
+--		"onsails/lspkind-nvim",
+--		{
+--			"hrsh7th/nvim-cmp",
+--			config = function()
+--				require("configs._nvim-cmp")
+--			end,
+--		},
+--		"lukas-reineke/indent-blankline.nvim",
+--		-- {
+--		--   "windwp/nvim-autopairs", -- smarter pairing of strings,parenthesis
+--		--   config = function(,
+--		--     require("configs._nvim-autopairs",
+--		--   end,
+--		-- },
+--		"dstein64/vim-startuptime",
+--		"tpope/vim-fugitive",
+--		{
+--			"nvim-treesitter/nvim-treesitter",
+--			event = "BufRead",
+--			config = function()
+--				require("configs._nvim-treesitter")
+--			end,
+--		},
+--		{
+--			"neovim/nvim-lspconfig",
+--			config = function()
+--				require("configs._nvim-lspconfig")
+--			end,
+--		},
+--		{
+--			"jose-elias-alvarez/null-ls.nvim",
+--			config = function()
+--				require("configs._null-ls")
+--			end,
+--		},
+		{
 			"junegunn/fzf",
 			hook = fn["fzf#install"],
 		},
@@ -98,20 +65,20 @@ end,
 		{
 			"akinsho/nvim-bufferline.lua",
 			config = function()
-				require("lua/plugins/._top-bufferline")
+				require("configs._top-bufferline")
 			end,
 		},
 		-- {
 		-- 	"kyazdani42/nvim-web-devicons",
 		-- 	config = function()
-		-- 		require("lua/plugins/._nvim-web-devicons")
+		-- 		require("configs._nvim-web-devicons")
 		-- 	end,
 		-- },
 		-- {
 		--   "kyazdani42/nvim-tree.lua",
 		--   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
 		--   config = function()
-		--     require("lua/plugins/._nvim-tree")
+		--     require("configs._nvim-tree")
 		--   end,
 		-- },
 		{
@@ -131,7 +98,7 @@ end,
 		{
 			"nvim-telescope/telescope.nvim",
 			config = function()
-				require("lua/plugins/._telescope")
+				require("configs._telescope")
 			end,
 			dependencies = {
 				{ "nvim-lua/popup.nvim" },
@@ -154,7 +121,7 @@ end,
 		-- {
 		--   "mhinz/vim-startify",
 		--   config = function(,
-		--     require("lua/plugins/._startify",
+		--     require("configs._startify",
 		--   end,
 		-- },
 		"wellle/targets.vim", -- extends ci' to things like (),commas,
@@ -167,7 +134,7 @@ end,
 		{
 			"folke/which-key.nvim",
 			config = function()
-				require("lua/plugins/._which-key")
+				require("configs._which-key")
 			end,
 		},
 		--
@@ -190,7 +157,7 @@ end,
 		{
 			"aserowy/tmux.nvim",
 			config = function()
-				require("lua/plugins/._tmux")
+				require("configs._tmux")
 			end,
 		},
 
@@ -249,6 +216,4 @@ end,
 		--     require("lsp_lines").setup()
 		--   end,
 		-- },
-
-	}
-)
+}

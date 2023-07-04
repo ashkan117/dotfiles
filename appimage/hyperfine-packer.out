@@ -1,0 +1,4 @@
+Benchmark 1: ./nvim.appimage --headless +qa
+  Time (mean ± σ):     292.8 ms ±  33.0 ms    [User: 133.6 ms, System: 62.3 ms]
+  Range (min … max):   240.6 ms … 335.1 ms    10 runs
+ 
