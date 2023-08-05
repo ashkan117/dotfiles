@@ -1,5 +1,6 @@
 -- local present1, lspconfig = pcall(require, "lspconfig")
 local lspconfig = require("lspconfig")
+-- local configs = require("lspconfig.configs")
 -- local present2, lspinstall = pcall(require, "lspinstall")
 -- local present1, lspinstall = pcall(require, "nvim-lsp-installer")
 -- local lspinstall = require("nvim-lsp-installer")
@@ -61,6 +62,8 @@ local on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
+        -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+        -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
         vim.lsp.buf.format({
           bufnr = bufnr,
           -- filter = function(lsp_client)

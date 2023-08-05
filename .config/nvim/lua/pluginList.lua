@@ -223,14 +223,6 @@ return packer.startup(function()
   })
   use("mfussenegger/nvim-jdtls")
   use({
-    "otavioschwanck/cool-substitute.nvim",
-    config = function()
-      require 'cool-substitute'.setup({
-        setup_keybindings = true
-      })
-    end,
-  })
-  use({
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
@@ -276,4 +268,23 @@ return packer.startup(function()
       require("lsp_lines").setup()
     end,
   })
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" },
+  })
+
+  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" } })
+  use 'olacin/telescope-cc.nvim'
+  use 'barrett-ruth/telescope-http.nvim'
+  use("smilovanovic/telescope-search-dir-picker.nvim")
+
+
+  -- use({
+  --   "folke/flash.nvim",
+  --   setup = function()
+  --     require("folke/flash.nvim").setup()
+  --   end,
+  -- })
 end)
