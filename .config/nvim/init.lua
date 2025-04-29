@@ -10,3 +10,8 @@ local modules = {
 for i = 1, #modules, 1 do
   pcall(require, modules[i])
 end
+
+local neogit = require('neogit')
+neogit.setup {}
+
+-- require("elixir").setup()

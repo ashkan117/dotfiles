@@ -30,18 +30,7 @@ return packer.startup(function()
     "tpope/vim-surround",
   })
 
-  use({
-    "bkad/CamelCaseMotion",
-  })
-
   use({ 'mbbill/undotree' })
-
-  use({
-    "ggandor/leap.nvim",
-    config = function()
-      require("leap").set_default_keymaps()
-    end,
-  })
 
   use({
     "tpope/vim-repeat",
@@ -88,8 +77,6 @@ return packer.startup(function()
       require("configs._nvim-autopairs")
     end,
   })
-  use({ "dstein64/vim-startuptime" })
-  use({ "tpope/vim-fugitive" })
   use({
     "nvim-treesitter/nvim-treesitter",
     event = "BufRead",
@@ -127,13 +114,6 @@ return packer.startup(function()
       require("configs._nvim-web-devicons")
     end,
   })
-  -- use({
-  --   "kyazdani42/nvim-tree.lua",
-  --   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-  --   config = function()
-  --     require("configs._nvim-tree")
-  --   end,
-  -- })
   use({
     "numToStr/Comment.nvim",
     config = function()
@@ -187,7 +167,6 @@ return packer.startup(function()
     event = "CursorMoved",
   })
 
-  use({ "jbyuki/one-small-step-for-vimkind" })
   use({
     "folke/which-key.nvim",
     config = function()
@@ -206,10 +185,6 @@ return packer.startup(function()
   --
 
   use({ "ray-x/lsp_signature.nvim" })
-  use({
-    "tweekmonster/startuptime.vim",
-    cmd = "StartupTime",
-  })
   use("folke/tokyonight.nvim")
   use({
     "aserowy/tmux.nvim",
@@ -229,7 +204,7 @@ return packer.startup(function()
     end,
   })
   use({
-    "glepnir/lspsaga.nvim",
+    "nvimdev/lspsaga.nvim",
     branch = "main",
     config = function()
       require("lspsaga").setup({})
@@ -274,17 +249,37 @@ return packer.startup(function()
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" },
   })
-
-  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" } })
   use 'olacin/telescope-cc.nvim'
+  use 'dstein64/vim-startuptime'
   use 'barrett-ruth/telescope-http.nvim'
   use("smilovanovic/telescope-search-dir-picker.nvim")
+  use("tpope/vim-projectionist")
+  use {
+    "lewis6991/gitsigns.nvim",
+    -- Calling setup is optional.
+    config = function()
+      require('gitsigns').setup()
+    end,
 
+  }
+  use {
+    "NeogitOrg/neogit",
+    config = function()
+      local neogit = require('neogit')
+      neogit.setup {}
+    end,
+  }
+  use { 'jake-stewart/normon.nvim', config = function()
+    local normon = require("normon")
+    -- cgn on current word/selection
+    normon("<leader>n", "cgn")
+    normon("<leader>N", "cgN")
+  end
 
-  -- use({
-  --   "folke/flash.nvim",
-  --   setup = function()
-  --     require("folke/flash.nvim").setup()
-  --   end,
-  -- })
+  }
+  -- use { 'jake-stewart/recursive-macro.nvim',
+  --   config = function()
+  --     require("recursive-macros").setup()
+  --   end
+  -- }
 end)

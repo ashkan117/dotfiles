@@ -1,6 +1,6 @@
 -- local present1, lspconfig = pcall(require, "lspconfig")
 local lspconfig = require("lspconfig")
--- local configs = require("lspconfig.configs")
+local configs = require("lspconfig.configs")
 -- local present2, lspinstall = pcall(require, "lspinstall")
 -- local present1, lspinstall = pcall(require, "nvim-lsp-installer")
 -- local lspinstall = require("nvim-lsp-installer")
@@ -187,3 +187,22 @@ lspconfig.yamlls.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })
+
+local lexical_config = {
+  filetypes = { "elixir", "eelixir" },
+  cmd = { "/home/ash/projects/lexical/_build/dev/rel/lexical/start_lexical.sh" },
+  settings = {}
+}
+
+if not configs.lexical then
+  configs.lexical = {
+    default_config = {
+      filetypes = lexical_config.filetypes,
+      cmd = lexical_config.cmd,
+      root_dir = function(fname)
+        return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+      end,
+      settings = lexical_config.settings
+    }
+  }
+end

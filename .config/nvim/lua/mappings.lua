@@ -184,6 +184,7 @@ vim.keymap.set("n", "|", "<cmd>Neotree reveal<CR>", { noremap = true, silent = t
 -- { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>b", "<cmd>Neotree toggle show buffers right<CR>", { noremap = true, silent = true })
 
+map("n", "<leader>cl", "<Cmd>lua vim.lsp.codelens.run()<CR>")
 
 -- vim.api.nvim_set_hl(0, 'NeoTreeGitAdded', { bg = '#282828' })
 -- vim.api.nvim_set_hl(0, 'NeoTreeGitConflict', { bg = '#282828' })
