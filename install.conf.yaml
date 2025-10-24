@@ -10,6 +10,12 @@
     ~/.config/kitty: 
       path: .config/kitty/
       force: true
+    ~/.config/hyperland/:
+      path: .config/hyperland/
+      force: true
+    ~/.config/waybar/:
+      path: .config/waybar/
+      force: true
     ~/.config/nvim: 
       path: .config/nvim/ 
       force: true
